@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+ Error - Dave Milan
+{% endblock title %}
+{% block message %}
+<section class="py-4 text-center">
+    <div class="container">
+        <div><i class="bi bi-exclamation-triangle" style="font-size: 40px;"></i></div>
+        <div style="font-size:smaller ;">An error occurred during processing. This may be because the email address already exists or network/server error. Try using another email different from {{email}}</div>
+    </div>
+</section>
+{% endblock message %}

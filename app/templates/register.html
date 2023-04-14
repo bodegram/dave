@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Sign up
+{% endblock title %}
+{% block message %}
+<section class="py-3">
+    <div class="container">
+        <div>
+           <div class="row g-0">
+            <div class="col-sm-6">
+                <img src="{% static 'images/3.jpg' %}" class="image rounded-top rounded-bottom" width="100%" alt="">
+            </div>
+            <div class="col-sm-6">
+                <div class="card border-0" >
+                    <div class="card-body">
+                        <div class="h2 mb-3">Create your account now</div>
+                        <div>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{message}}
+                              </div>
+                            {% endfor %}
+                            {% else %}
+                            <div></div>
+                            {% endif %}
+                        </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Firstname</label>
+                                <div><input type="text" required name="firstname" class="form-control w-100" id=""></div>
+                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Lastname</label>
+                                <div><input type="text" required name="lastname" class="form-control w-100" id=""></div>
+                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Username</label>
+                                <div><input type="text" required name="username" class="form-control w-100" id=""></div>
+                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Email</label>
+                                <div><input type="text" name="email" required class="form-control w-100" id=""></div>
+                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Password</label>
+                            <div><input type="password" name="password" required class="form-control w-100" id=""></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="" style="font-size: small; font-weight:bold">Confirm password</label>
+                            <div><input type="password" name="cpassword" required class="form-control w-100" id=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-md bg-warning text-white">Create account</button>
+                    </div>
+                    
+                </form>
+                <div class="container mt-2" style="font-size: smaller;">Already have an account <a href="{% url 'login' %}" class="text-dark">Login now</a></div>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

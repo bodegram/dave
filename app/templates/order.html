@@ -1,0 +1,105 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Order - Dave Milan
+{% endblock title %}
+{% block message %}
+<style>
+    #card{
+        width: 25%;
+    }
+    @media screen and (max-width: 769px) {
+        #card{
+        width: 75%;
+    }
+    }
+</style>
+<section>
+    <div class="container">
+        <div class="h5 text-center mb-4">Account > Orders</div>
+        {% if items %}
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div style="font-weight: bold;"><i class="bi bi-bag"></i> Product</div>
+                </div>
+                <div class="col">
+                    <div style="font-weight: bold;">Amount</div>
+                </div>
+                <div class="col">
+                    <div style="font-weight: bold;">Transaction ID</div>
+                </div>
+                <div class="col">
+                    <div style="font-weight: bold;">Date</div>
+                </div>
+                <div class="col">
+                    <div style="font-weight: bold;">Status</div>
+                </div>
+            </div>
+            <hr>
+            {% for item in items %}
+            <div class="row">
+                <div class="col">
+                   <div style="font-size: smaller;">{{forloop.counter}}. <img src="{{item.ordered_item.images.url}}" style="width: 2rem;" alt=""> {{item.ordered_item}} X {{item.quantity}}</div>
+                </div>
+                <div class="col">
+                    <div style="font-size: smaller;">NGN {{item.total | intcomma}}</div>
+                </div>
+                <div class="col">
+                   <div style="font-size: smaller;">#{{item.ref}}</div>
+                </div>
+                <div class="col">
+                   <div style="font-size: smaller;"><i>{{item.ordered_date}}</i></div>
+                </div>
+                <div class="col">
+                    {% if item.order_status == "Pending" %}
+                    <div style="font-size: smaller;">Status: Pending</div>
+                    <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-danger" style="width: 25%"></div>
+                      </div>
+                    {% endif %}
+                    {% if item.order_status == "Processing" %}
+                    <div style="font-size: smaller;">Status: Processing</div>
+                    <div style="font-size: smaller;">Estimated Days: <span>{{item.estimated_days}} Days</span> <span class="badge bg-black">{{item.remaining_days}} days left</span></div>
+                    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                      </div>
+                    {% endif %}
+                    {% if item.order_status == "Out-for-delivery" %}
+                    <div style="font-size: smaller;">Status: Out-for-delivery</div>
+                    <div style="font-size: smaller;">Estimated Days: <span>{{item.estimated_days}} Days</span> <span class="badge bg-black">{{item.remaining_days}} days left</span></div>
+                    <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-info" style="width: 75%"></div>
+                      </div> 
+                    {% endif %}
+                    {% if item.order_status == "Delivered" %}
+                    <div style="font-size: smaller;">Status: Delivered</div>
+                    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success" style="width: 100%"></div>
+                      </div>                      
+
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <a href="{% url 'order_product' item.id %}" class="btn btn-sm bg-black text-light">Details</a>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="py-4">
+                <div class="card mx-auto text-center" id="card">
+                    <div class="card-body">
+                         <div><i class="bi bi-bag-fill text-warning" style="font-size: 40px;"></i></div>
+                         <div style="font-size: smaller;font-weight: bold;">No order yet</div>
+                         <div style="font-size: 10px;">You have not ordered any item yet.</div>
+                    </div>
+                </div>
+            </div>
+         
+        {% endif %}
+    </div>
+</section>
+ 
+{% endblock message %}

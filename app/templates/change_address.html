@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+ Shipping Address - Dave Milan
+{% endblock title %}
+{% block message %}
+ <section>
+    <div class="container">
+        <div class="h5">Shipping Address</div>
+        <div>
+            <form action="" method="post">{% csrf_token %}
+                <div class="mb-3">
+                    <label for="">Address</label>
+                    <input type="text" name="address" value="{{address.shipping_address}}" class="form-control" id="">
+                    {% for message in messages %}
+                    <div class="text-danger"><i class="bi bi-exclamation-triangle"></i> {{message}}</div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-sm btn-warning text-light">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'checkout' %}" class="text-black">Proceed to checkout</a>
+        </div>
+    </div>
+ </section>
+ 
+{% endblock message %}

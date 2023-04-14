@@ -1,0 +1,265 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Dave Milan - Shop with us!
+{% endblock title %}
+{% block message %}
+<style>
+    .vl {
+      border-left: 1px solid black;
+      height: 700px;
+      margin-right: 12px;
+    }
+    .hero{
+        height: 26rem;
+        width: 100%;
+        opacity: 0.3;
+        background-size: cover;
+    }
+    </style>
+      <section class="py-4">
+        <div class="container-fluid">
+            <div class="card bg-black text-white" style="border: none;">
+                <div class="card-body">
+                    <div><i class="bi bi-bag"></i> New Deals</div>
+                </div>
+            </div>
+            {% if todays_deal %}
+            <div class="row mt-2">
+                {% for item in todays_deal %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <img src="{{item.images.url}}" style="width: 3rem;" alt="">
+                            </div>
+                             <div style="font-size: smaller;font-weight:bold">{{item.product}}</div>
+                             <div style="font-size: smaller;">NGN {{item.price | intcomma}}</div>
+                             <div>
+                                <a href="" class="btn btn-sm btn-warning text-white" style="font-size: smaller;">Shop now <i class="bi bi-bag"></i></a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <section class="py-3">
+        <div class="container-fluid">
+             <div class="text-center text-light bg-black py-5 rounded-top rounded-bottom">
+                <div class="h5" style="font-weight: bold;">SHOPPING MADE EASY</div>
+                <div>
+                    <a href="{% url 'shop' %}" class="btn btn-sm btn-warning text-light">Visit Store <i class="bi bi-bag"></i></a>
+                </div>
+             </div>
+             
+        </div>
+    </section>
+    <section>
+        <div class="container-fluid">
+            <div class="card bg-black text-white" style="border: none;">
+                <div class="card-body">
+                    <div>Today's Deals</div>
+                </div>
+            </div>
+            {% if todays_deal %}
+            <div class="row mt-2">
+                {% for item in todays_deal %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <img src="{{item.images.url}}" style="width: 3rem;" alt="">
+                            </div>
+                             <div style="font-size: smaller;font-weight:bold">{{item.product}}</div>
+                             <div style="font-size: smaller;">NGN {{item.price | intcomma}}</div>
+                             <div>
+                                <a href="" class="btn btn-sm btn-warning text-white" style="font-size: smaller;">Shop now <i class="bi bi-bag"></i></a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <section class="py-4">
+        <div class="container-fluid">
+            <div class="card bg-warning text-white" style="border: none;">
+                <div class="card-body">
+                    <div>New Arrival</div>
+                </div>
+            </div>
+            {% if todays_deal %}
+            <div class="row mt-2">
+                {% for item in todays_deal %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <img src="{{item.images.url}}" style="width: 3rem;" alt="">
+                            </div>
+                             <div style="font-size: smaller;font-weight:bold">{{item.product}}</div>
+                             <div style="font-size: smaller;">NGN {{item.price | intcomma}}</div>
+                             <div>
+                                <a href="" class="btn btn-sm bg-black text-white" style="font-size: smaller;">Shop now <i class="bi bi-bag"></i></a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+<section class="py-4">
+    <div class="container-fluid">
+        <div class="h5 mb-3" style="font-weight: bold;">Brands</div>
+        <div>
+
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+               <div class="h5" style="font-weight: bold;">We provide best <br> customer experiences</div>
+            </div>
+            <div class="col-sm-6">
+                 <div style="font-size: smaller;"><span class="vl"></span> We ensure our customers have the best shopping experience</div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-3 mb-3">
+                <div class="btn btn-sm btn-light"><i class="bi bi-bag"></i></div>
+                <div style="font-weight:bold">Original Products</div>
+                <div style="font-size: smaller;">We provide moneyback guarantee if the product are not original.</div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="btn btn-sm btn-light"><i class="bi bi-person-circle"></i></div>
+                <div style="font-weight:bold">Satisfaction Guarantee</div>
+                <div style="font-size: smaller;">Exchange the product you"ve purchased if it doesn't fit on you.</div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="btn btn-sm btn-light"><i class="bi bi-clock"></i></div>
+                <div style="font-weight:bold">New Arrival Everyday</div>
+                <div style="font-size: smaller;">We update our collections almost everyday.</div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="btn btn-sm btn-light"><i class="bi bi-compass"></i></div>
+                <div style="font-weight:bold">Fast and Free Shipping</div>
+                <div style="font-size: smaller;">We offer fast and free shipping for our loyal customers.</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container-fluid">
+        <div style="font-weight: bold;" class="mb-3">Currated Picks {% if user.is_authenticated %} for you {{user.username | title}} {% endif %} </div>
+        <div class="row">
+            <div class="col-sm-3 mb-3">
+               <div class="card">
+                <img src="{% static 'images/4.jpg' %}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <div class="float-start">Best Seller</div>
+                    <div class="float-end"><i class="bi bi-arrow-right"></i></div>
+                </div>
+               </div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="card">
+                    <img src="{% static 'images/2.jpg' %}" class="card-img-top" style="height: 175px;" alt="">
+                    <div class="card-body">
+                        <div class="float-start">Shop Men</div>
+                        <div class="float-end"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                   </div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="card">
+                    <img src="{% static 'images/3.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="float-start">Shop Women</div>
+                        <div class="float-end"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                   </div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                <div class="card">
+                    <img src="{% static 'images/1.jpg' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="float-start">Shop Casual</div>
+                        <div class="float-end"><i class="bi bi-arrow-right"></i></div>
+                    </div>
+                   </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="py-4">
+    <div class="container-fluid">
+        <div class="card bg-black text-white" style="border: none;">
+            <div class="card-body">
+                <div><i class="bi bi-bag"></i> Featured Products</div>
+            </div>
+        </div>
+        {% if todays_deal %}
+        <div class="row mt-2">
+            {% for item in todays_deal %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <img src="{{item.images.url}}" style="width: 3rem;" alt="">
+                        </div>
+                         <div style="font-size: smaller;font-weight:bold">{{item.product}}</div>
+                         <div style="font-size: smaller;">NGN {{item.price}}</div>
+                         <div>
+                            <a href="" class="btn btn-sm btn-warning text-white" style="font-size: smaller;">Shop now <i class="bi bi-bag"></i></a>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+<section class="py-5">
+    <div class="container-fluid">
+        <div class="card bg-black" style="border: none;">
+            <div class="card-body">
+                <div style="font-size: smaller;font-weight: bold;" class="text-light">Limit offer</div>
+                <div class="h5 text-light mb-2 mt-2" style="font-weight: bold;">35% off for new customers on clothing</div>
+                <div>
+                    <a href="" class="btn btn-light text-dark">Grab it now <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container-fluid">
+        <div class="text-center">
+            <div class="h5" style="font-weight: bold;">Subscribe to our newsletter to get update to our latest collections</div>
+            <div style="font-size: smaller;" class="text-secondary">Get 20% off on your first order just by subscribing to our newsletter</div>
+            <div class="mb-3 mt-3">
+                <form action="{% url 'newsletter' %}" method="post">{% csrf_token %}
+                    <input type="email" name="email" class="mb-2" placeholder="Enter your email" id="">
+                    <button type="submit" class="btn btn-sm bg-black text-white">Subscribe</button>
+                </form>
+            </div>
+            <div style="font-size: smaller;" class="text-secondary">
+                <div>You will be able to unsubscribe at anytime.</div>
+                <div>Read our Privacy Policy <a href="" class="text-dark">here</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock message %}

@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Wishlist - Dave Milan
+{% endblock title %}
+{% block message %}
+<style>
+    #card{
+        width: 25%;
+    }
+    @media screen and (max-width: 769px) {
+        #card{
+        width: 75%;
+    }
+    }
+</style>
+ <section class="mt-2 mb-4">
+    <div class="container">
+        <div class="text-center"><span>Account > </span>Wishlist</div>
+    </div>
+ </section>
+ {% if items %} 
+ <section class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 container mt-3">
+                <div class="card border-5">
+                    <div class="card-body">
+                        <div>Wishlist - items</div> <hr>
+                        {% if items %} 
+                        {% for item in items %}
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="float-start"><a href="../product/{{item.item.id}}"><img src="{{item.item.images.url}}" width="50px" height="auto" alt=""> </a> <span style="margin-left: 10px; font-size:smaller; font-weight: bold;">{{item.item}}</span></div>
+                                <div class="float-end mt-2" style="font-size: small;">NGN{{item.item.price}} <a href="{% url 'remove_wishlist' item.id %}" class="btn btn-sm btn-danger text-light"><i class="bi bi-trash"></i></a></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5 mt-3">
+                 <div class="card">
+                    <div class="card-body">
+                        <div>Summary</div> <hr>
+                        <div>
+                            <div>Total amount<span class="float-end">NGN{{total | intcomma}}</div>     
+                        </div> 
+                        <div class="mt-1">
+                            <a href="{% url 'remove_all_from_wishlist' %}" class="btn btn-sm btn-warning text-light w-100">Empty Wishlist</a>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+ </section>
+ {% else %}
+ <section class="py-5">
+    <div class="container">
+        <div class="card mx-auto text-center" id="card">
+            <div class="card-body">
+                 <div><i class="bi bi-heart-fill text-danger" style="font-size: 40px;"></i></div>
+                 <div style="font-size: smaller;font-weight: bold;">Your Wishlist is empty</div>
+                 <div style="font-size: 10px;">You have not added any item to your wishlist.</div>
+            </div>
+        </div>
+    </div>
+ </section>
+ {% endif %}
+ 
+{% endblock message %}

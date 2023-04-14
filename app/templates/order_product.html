@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ {{item.ordered_item}} - Shop
+{% endblock title %}
+{% block message %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 mb-3">
+                <div style="font-weight: bold;"><i class="bi bi-bag"></i> {{item.ordered_item}}</div>
+                <div class="py-2">
+                    <div style="font-weight:700;font-size: small;">Amount</div>
+                    <div style="font-size: smaller;">NGN {{item.total | intcomma}}</div>
+                </div>
+                <div class="py-2">
+                    <div style="font-weight:700;font-size: small;">Quantity</div>
+                    <div style="font-size: smaller;">X{{item.quantity}}</div>
+                </div>
+                <div class="py-2">
+                    <div style="font-weight:700;font-size: small;">Transaction ID</div>
+                    <div style="font-size: smaller;">#{{item.ref}}</div>
+                </div>
+                <div class="py-2">
+                    <div style="font-weight:700;font-size: small;">Ordered Date</div>
+                    <div style="font-size: smaller;"><i class="bi bi-calendar"></i> {{item.ordered_date}}</div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                 <div>
+                    <img src="{{item.ordered_item.images.url}}" class="img-fluid" alt="">
+                 </div>
+                 <div class="mt-2">
+                    <div style="font-size: small;font-weight: 800;" class="mb-2"><i class="bi bi-bag"></i> Product Details</div>
+                    <div class="h5" style="font-weight: bold;">NGN{{item.ordered_item.price | intcomma}}</div>
+                    <div class="py-2">
+                        <div style="font-size: small;font-weight: 700;">Category</div>
+                        <div style="font-size: small;">{{item.ordered_item.category}}</div>
+                    </div>
+                    <div class="py-2">
+                        <div style="font-size: small;font-weight: 700;">Description</div>
+                        <div style="font-size: small;">{{item.ordered_item.description | safe}}</div>
+                    </div>
+                    <div class="py-2">
+                        <a href="" class="btn btn-sm btn-warning text-light w-100">Contact us <i class="bi bi-telephone"></i></a>
+                    </div>
+                 </div>
+            </div>
+            <div class="col-sm-3 mb-3">
+                 <div style="font-weight: bold;"><i class="bi bi-car-front"></i> Order Details</div>
+                 <div style="font-size: smaller;" class="py-1">Shipping Address: {{item.address.shipping_address}}</div>
+                 <div class="py-1" style="font-size: small;">Estimated Days: {{item.estimated_days}} Days</div>
+                 <div class="py-1" style="font-size: small;">Remaining Days: {{item.remaining_days}} Days</div>
+                 <div class="py-1">
+                    {% if item.order_status == "Pending" %}
+                    <div style="font-size: smaller;">Status: Pending</div>
+                    <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-danger" style="width: 25%"></div>
+                      </div>
+                    {% endif %}
+                    {% if item.order_status == "Processing" %}
+                    <div style="font-size: smaller;">Status: Processing</div>
+                    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                      </div>
+                    {% endif %}
+                    {% if item.order_status == "Out-for-delivery" %}
+                    <div style="font-size: smaller;">Status: Out-for-delivery</div>
+                    <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-info" style="width: 75%"></div>
+                      </div> 
+                    {% endif %}
+                    {% if item.order_status == "Delivered" %}
+                    <div style="font-size: smaller;">Status: Delivered</div>
+                    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success" style="width: 100%"></div>
+                      </div>                      
+
+                    {% endif %}
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock message %}

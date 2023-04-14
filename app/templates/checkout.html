@@ -1,0 +1,83 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Checkout - Dave Milan
+{% endblock title %}
+{% block message %}
+
+<section>
+    <div class="container">
+        <div class="h5 mb-2">Checkout <i class="bi bi-cart"></i></div>
+        <div class="row">
+            <div class="col-sm-8 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Summary</div>
+                       {% if carts %}
+                       {% for item in carts %}
+                        <hr><div>
+                            <div class="float-start"><i class="bi bi-bag"></i> {{item.quantity}}x  {{item.item.product}}</div>
+                            <div class="float-end">NGN{{item.item.price | intcomma}}</div>
+                            <br>
+                        </div><hr>
+                       {% endfor %}
+                       <div>
+                        <form action="" id="paymentForm">
+                            <button type="submit" class="btn btn-md text-light btn-warning w-100 ">Pay NGN {{total | intcomma}}</button>
+                       </form>
+                    </div>
+                       {% else %}
+                       <div>No item available</div>
+                       {% endif %}
+                    </div>
+                  </div>
+            </div>
+            
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Shipping Address</div><hr>
+                        <div class="card-text">
+                          <div style="font-size: smaller;"><i class="bi bi-geo-alt-fill"></i> {{address.shipping_address}}</div>
+                          {% if address == "No Address" %}
+                          <hr>
+                           <a href="{% url 'address' %}" class="btn btn-sm btn-warning text-light">Add Shipping Address</a>
+                           {% else %}
+                           <a href="{% url 'change_address' %}" class="btn btn-sm btn-warning text-light">Change Shipping Address</a>
+                          {% endif %}
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener("submit", payWithPaystack, false);
+function payWithPaystack(e) {
+e.preventDefault();
+
+let handler = PaystackPop.setup({
+key: 'pk_test_711ad34a34c606fdd90c1a9476cc275b69ced631', // Replace with your public key
+email: '{{user.email}}',
+amount: '{{total}}' * 100,
+currency: 'NGN',
+ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+// label: "Optional string that replaces customer email"
+onClose: function(){
+  alert('Window closed.');
+},
+callback: function(response){
+  let message = 'Payment complete! Reference: ' + response.reference;
+
+  window.location = "{% url 'payment_successful' %}?ref=" + response.reference 
+}
+});
+
+handler.openIframe();
+}
+</script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+{% endblock message %}

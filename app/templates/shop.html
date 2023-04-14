@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Shop - Dave Milan
+{% endblock title %}
+{% block message %}
+ <section class="mt-2">
+    <div class="container">
+        <div class="h3 text-center mb-5 mt-2">Store <i class="bi bi-bag"></i></div>
+    </div>
+ </section>
+ <section>
+    <div class="container">
+       <div class="row">
+        {% if item %}
+        {% for product in item %}
+        <div class="col-sm-3 mb-3">
+         <a href="../product/{{product.id}}" style="text-decoration: none; color:black" class="col-sm-4 mb-3">
+            <div class="card">
+                <img src="{{product.images.url}}" class="img-fluid card-img-top"  alt="">
+                <div class="card-body">
+                    <div class="float-start text-warning" style="font-weight: bolder;">{{product.product}}</div>
+                    <div class="float-end" style="font-weight: bold; padding: 1px 3px;"><i class="bi bi-bag" style="font-size: 20px;"></i></div> <br>
+                    <div style="font-weight: bold;">NGN {{product.price | intcomma}}</div> 
+                    <a href="{% url 'add_to_cart' product.id %}"  class="btn btn-sm btn-warning text-light w-100">Add to cart</a>
+                </div>
+            </div>
+           </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div></div>
+        {% endif %}
+       </div>
+    </div>
+ </section>
+ <section>
+   <div class="container text-center">
+      {% if item %}
+       <div>{{item.number}} of {{item.paginator.num_pages}}</div>
+       <div>
+         <a href="?page=1" class="btn btn-sm btn-warning text-light">&laquo</a>
+         {% if item.has_previous %}
+         <a href="?page={{item.previous_page_number}}" class="btn btn-sm btn-warning text-light">Prev</a>
+         {% endif %}
+         {% if item.has_next %}
+         <a href="?page={{item.next_page_number}}" class="btn btn-sm btn-warning text-light">Next</a>
+         {% endif %}
+         <a href="?page={{item.paginator.num_pages}}" class="btn btn-sm btn-warning text-light">&raquo</a>
+       </div>
+      {% endif %}
+   </div>
+ </section>
+{% endblock message %}

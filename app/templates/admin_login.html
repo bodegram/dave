@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Log in as admin
+{% endblock title %}
+{% block message %}
+<section class="py-3">
+    <div class="container">
+        <div>
+           <div class="row g-0">
+            <div class="col-sm-6">
+                <img src="{% static 'images/1.jpg' %}" class="image rounded-top rounded-bottom" width="100%" alt="">
+            </div>
+            <div class="col-sm-6">
+                <div class="card py-1 border-0" >
+                    <div class="card-body">
+                        <div class="h2 mb-3">Welcome back!</div>
+                        <div class="mb-1" style="font-weight: bold;">Log in as admin</div>
+                        <div>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{message}}
+                              </div>
+                            {% endfor %}
+                            {% else %}
+                            <div></div>
+                            {% endif %}
+                        </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                    <label for="" style="font-size: small; font-weight:bold">Email Address</label>
+                    <div><input type="email" required name="email" class="form-control w-100" id="username"></div>
+                    </div>
+                    <div class="mb-3">
+                        
+                        <label for="" style="font-size: small; font-weight:bold">Password</label>
+                    <div><input type="password" required name="password" class="form-control w-100" id="password"></div>
+                    <label for=""  style="font-size: small; font-weight:bold"><a href="" style="text-decoration: none;">Forgot Password?</a></label>
+                    </div>
+                    {% if request.GET.next %}
+                    <div>
+                        <input type="hidden" id="next" name="next">
+                    </div>
+                    {% endif %}
+                    <div>
+                        <button type="submit" class="btn btn-md bg-warning text-white">Log in</button>
+                    </div>
+                    
+                </form>
+                   <div class="mt-2" style="font-size: smaller;">Not registered yet <a href="{% url 'register' %}" class="text-dark">Sign up</a></div>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

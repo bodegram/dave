@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+ Settings - Dave Milan
+{% endblock title %}
+{% block message %}
+<section>
+    <div class="container">
+        <div class=""><a href="" class="text-dark" style="text-decoration: none;"><i class="bi bi-gear"></i> Settings</a></span></div>
+    </div>
+</section>
+<section class="py-3">
+    <div class="container">
+        <div class="py-2">
+            <div class="h5" style="font-size: small;font-weight: bold;">Update Personal Information</div>
+            <div style="font-size: smaller;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit excepturi nam architecto voluptate esse ratione maiores molestiae atque! Similique voluptas explicabo iste. Incidunt et provident est odio itaque, eveniet sunt?</div>
+        </div><hr>
+        <div class="py-2">
+            <div class="h5" style="font-size: small;font-weight: bold;">Terms and Conditions</div>
+            <div style="font-size: smaller;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit excepturi nam architecto voluptate esse ratione maiores molestiae atque! Similique voluptas explicabo iste. Incidunt et provident est odio itaque, eveniet sunt?</div>
+        </div><hr>
+        <div class="py-2">
+            <div class="h5" style="font-size: small;font-weight: bold;">Privacy Policy</div>
+            <div style="font-size: smaller;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit excepturi nam architecto voluptate esse ratione maiores molestiae atque! Similique voluptas explicabo iste. Incidunt et provident est odio itaque, eveniet sunt?</div>
+        </div><hr>
+        <div class="py-2">
+            <div class="h5" style="font-size: small;font-weight: bold;">Log out your account</div>
+            <div style="font-size: smaller;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit excepturi nam architecto voluptate esse ratione maiores molestiae atque! Similique voluptas explicabo iste. Incidunt et provident est odio itaque, eveniet sunt?</div>
+            <div>
+                <a href="{% url 'logout' %}" class="btn btn-sm btn-danger text-light px-3">Logout</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock message %}

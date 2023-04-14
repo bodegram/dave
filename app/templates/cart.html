@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load static %}
+{% block title %}
+ Cart - Dave Milan
+{% endblock title %}
+{% block message %}
+<style>
+    #card{
+        width: 25%;
+    }
+    @media screen and (max-width: 769px) {
+        #card{
+        width: 75%;
+    }
+    }
+</style>
+ <section class="mt-2 mb-4">
+    <div class="container">
+        <div class="text-center"><span>Account > </span>Cart</div>
+    </div>
+ </section>
+ {% if carts %} 
+ <section class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 container mt-3">
+                <div class="card border-5">
+                    <div class="card-body">
+                        <div>Cart - items</div> <hr>
+                        {% if carts %} 
+                        {% for cart in carts %}
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="float-start"><a href="../product/{{cart.item.id}}"><img src="{{cart.item.images.url}}" width="50px" height="auto" alt=""> </a> <span style="margin-left: 10px; font-size:smaller; font-weight: bold;">{{cart.item}}</span></div>
+                                <div class="float-end mt-2" style="font-size: small;"><a href="{% url 'remove_from_cart' cart.id %}" class="btn btn-sm btn-warning text-light">-</a> {{cart.quantity}} <a href="{% url 'add_to_cart' cart.item.id %}" class="btn btn-sm btn-warning text-light">+</a></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5 mt-3">
+                 <div class="card">
+                    <div class="card-body">
+                        <div>Summary</div> <hr>
+                        <div>
+                            <div>Total amount<span class="float-end">NGN {{total | intcomma}}</div>     
+                        </div> 
+                        <div class="mt-1">
+                            <a href="{% url 'checkout' %}" class="btn btn-sm btn-warning text-light w-100">Proceed to Checkout</a>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+ </section>
+ {% else %}
+ <section class="py-5">
+    <div class="container">
+        <div class="card mx-auto text-center" id="card">
+            <div class="card-body">
+                 <div><i class="bi bi-cart-fill text-warning" style="font-size: 40px;"></i></div>
+                 <div style="font-size: smaller;font-weight: bold;">Your cart is empty</div>
+                 <div style="font-size: 10px;">You have not added any item to your cart.</div>
+            </div>
+        </div>
+    </div>
+ </section>
+ {% endif %}
+ 
+{% endblock message %}

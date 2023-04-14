@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+ Error - Dave Milan
+{% endblock title %}
+{% block message %}
+<section class="py-4 text-center">
+    <div class="container">
+        <div><i class="bi bi-envelope" style="font-size: 40px;"></i></div>
+        <div style="font-size:smaller ;">{{email}}, thanks for subscribing to our newsletter and we cannot wait to give you latest update about our products.</div>
+    </div>
+</section>
+{% endblock message %}
